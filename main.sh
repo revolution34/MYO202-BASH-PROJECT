@@ -31,10 +31,6 @@ echo "MAC Adresleri (getmac):" >> $LOG_FILE
 getmac 2>/dev/null | grep -v -e '^[[:space:]]*$' >> $LOG_FILE
 
 
-echo "Donanim bilgileri toplandi. Sifreleme adimina geciliyor."
-echo "Lutfen (MYO+202) girip Enter'a basin."
-
-
 read -s -p "Lutfen Sifreyi Giriniz: " PAROLA
 echo ""
 
