@@ -40,7 +40,7 @@ echo "$PAROLA" | gpg --batch --yes --passphrase-fd 0 -c --cipher-algo AES256 -o 
 if [ $? -eq 0 ]; then
     echo -e "\nRaporlandırma ve Kriptolama Basarili Bir Sekilde Giris Yapilmistir!"
     echo "report.log.gpg dosyasi güncellendi."
-    # Orijinal report.log dosyasının otomatik silinmesi
+    
     rm -f $LOG_FILE
 else
     echo -e "\nHATA: Sifreleme sirasinda bir sorun olustu."
