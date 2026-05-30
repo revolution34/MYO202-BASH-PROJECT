@@ -14,12 +14,12 @@ echo "=== MYO202 BASH PROJESI DONANIM RAPORU ===" > $LOG_FILE
 echo "Rapor Tarihi: $(date '+%Y-%m-%d %H:%M:%S')" >> $LOG_FILE
 
 
-echo -e "\n[1] ANAKART UUID BILGISI" >> $LOG_FILE
+echo -e "\n[1] ANAKART UUID INFO" >> $LOG_FILE
 wmic path win32_computersystemproduct get uuid 2>/dev/null | grep -v "UUID" | tr -d '\r\n ' >> $LOG_FILE
 echo "" >> $LOG_FILE
 
 
-echo -e "\n[2] DISK BILGILERI (SSD/HDD)" >> $LOG_FILE
+echo -e "\n[2] DISK INFO (SSD/HDD)" >> $LOG_FILE
 wmic diskdrive get model,size 2>/dev/null | grep -v -e '^[[:space:]]*$' >> $LOG_FILE
 
 
@@ -31,23 +31,21 @@ echo "MAC Adresleri (getmac):" >> $LOG_FILE
 getmac 2>/dev/null | grep -v -e '^[[:space:]]*$' >> $LOG_FILE
 
 
-echo "--------------------------------------------------"
 echo "Donanim bilgileri toplandi. Sifreleme adimina geciliyor."
-echo "Hocanin belirledigi sifreyi (MYO+202) girip Enter'a basin."
-echo "--------------------------------------------------"
+echo "Lutfen (MYO+202) girip Enter'a basin."
 
 
-read -s -p "Kripto Sifresini Giriniz: " PAROLA
+read -s -p "Lutfen Sifreyi Giriniz: " PAROLA
 echo ""
 
 
 echo "$PAROLA" | gpg --batch --yes --passphrase-fd 0 -c --cipher-algo AES256 -o report.log.gpg $LOG_FILE
 
 if [ $? -eq 0 ]; then
-    echo -e "\n[BAŞARILI] Raporlandırma ve Kriptolama tamamlandi!"
+    echo -e "\nRaporlandırma ve Kriptolama Basarili Bir Sekilde Giris Yapilmistir!"
     echo "report.log.gpg dosyasi güncellendi."
     # Orijinal report.log dosyasının otomatik silinmesi
     rm -f $LOG_FILE
 else
-    echo -e "\n[HATA] Sifreleme sirasinda bir sorun olustu."
+    echo -e "\nHATA: Sifreleme sirasinda bir sorun olustu."
 fi
