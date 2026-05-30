@@ -40,7 +40,7 @@ echo "--------------------------------------------------"
 read -s -p "Kripto Sifresini Giriniz: " PAROLA
 echo ""
 
-# gpg komutu ile AES256 simetrik şifreleme
+
 echo "$PAROLA" | gpg --batch --yes --passphrase-fd 0 -c --cipher-algo AES256 -o report.log.gpg $LOG_FILE
 
 if [ $? -eq 0 ]; then
